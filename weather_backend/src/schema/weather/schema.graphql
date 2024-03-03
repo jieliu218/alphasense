@@ -1,0 +1,47 @@
+type Query {
+  getWeatherData(latitude: Float!, longitude: Float!): WeatherData
+}
+
+type WeatherData {
+  latitude: Float
+  longitude: Float
+  generationtimeMs: Float
+  utcOffsetSeconds: Int
+  timezone: String
+  timezoneAbbreviation: String
+  elevation: Float
+  currentUnits: CurrentUnits
+  current: CurrentWeather
+  hourlyUnits: HourlyUnits
+  hourly: HourlyWeather
+}
+
+type CurrentUnits {
+  time: String
+  interval: String
+  temperature2m: String
+  windSpeed10m: String
+  relativeHumidity2m: String
+}
+
+type CurrentWeather {
+  time: String
+  interval: Int
+  temperature2m: Float
+  windSpeed10m: Float
+  relativeHumidity2m: Int
+}
+
+type HourlyUnits {
+  time: String
+  temperature2m: String
+  relativeHumidity2m: String
+  windSpeed10m: String
+}
+
+type HourlyWeather {
+  time: [String]
+  temperature2m: [Float]
+  relativeHumidity2m: [Int]
+  windSpeed10m: [Float]
+}
