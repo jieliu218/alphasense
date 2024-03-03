@@ -1,1 +1,1 @@
-global.setTimeout = jest.fn(cb => cb());
+global.setTimeout = jest.fn((cb) => cb())

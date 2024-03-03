@@ -1,12 +1,20 @@
 import { type GraphQLResolveInfo } from 'graphql';
-import { type WeatherDataModel, type CurrentUnitsModel, type CurrentWeatherModel, type HourlyUnitsModel, type HourlyWeatherModel } from '../model/weather';
+import {
+  type WeatherDataModel,
+  type CurrentUnitsModel,
+  type CurrentWeatherModel,
+  type HourlyUnitsModel,
+  type HourlyWeatherModel
+} from '../model/weather';
 export type Maybe<T> = T | null | undefined;
 export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends Record<string, unknown>> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends Record<string, unknown>, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+export type Incremental<T> =
+  | T
+  | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export interface Scalars {
@@ -81,7 +89,9 @@ export type ResolverTypeWrapper<T> = Promise<T> | T;
 export interface ResolverWithResolve<TResult, TParent, TContext, TArgs> {
   resolve: ResolverFn<TResult, TParent, TContext, TArgs>
 }
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
+  | ResolverFn<TResult, TParent, TContext, TArgs>
+  | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -104,7 +114,13 @@ export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
   info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
-export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
+export interface SubscriptionSubscriberObject<
+  TResult,
+  TKey extends string,
+  TParent,
+  TContext,
+  TArgs,
+> {
   subscribe: SubscriptionSubscribeFn<{ [key in TKey]: TResult }, TParent, TContext, TArgs>
   resolve?: SubscriptionResolveFn<TResult, { [key in TKey]: TResult }, TContext, TArgs>
 }
@@ -118,7 +134,13 @@ export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, 
   | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
   | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
-export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
+export type SubscriptionResolver<
+  TResult,
+  TKey extends string,
+  TParent = {},
+  TContext = {},
+  TArgs = {},
+> =
   | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
   | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
@@ -128,7 +150,11 @@ export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
   info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
-export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
+export type IsTypeOfResolverFn<T = {}, TContext = {}> = (
+  obj: T,
+  context: TContext,
+  info: GraphQLResolveInfo
+) => boolean | Promise<boolean>;
 
 export type NextResolverFn<T> = () => Promise<T>;
 
@@ -168,7 +194,10 @@ export interface ResolversParentTypes {
   Boolean: Scalars['Boolean']['output']
 }
 
-export interface CurrentUnitsResolvers<ContextType = any, ParentType extends ResolversParentTypes['CurrentUnits'] = ResolversParentTypes['CurrentUnits']> {
+export interface CurrentUnitsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['CurrentUnits'] = ResolversParentTypes['CurrentUnits'],
+> {
   interval?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   relativeHumidity2m?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   temperature2m?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -177,7 +206,11 @@ export interface CurrentUnitsResolvers<ContextType = any, ParentType extends Res
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
-export interface CurrentWeatherResolvers<ContextType = any, ParentType extends ResolversParentTypes['CurrentWeather'] = ResolversParentTypes['CurrentWeather']> {
+export interface CurrentWeatherResolvers<
+  ContextType = any,
+  ParentType extends
+  ResolversParentTypes['CurrentWeather'] = ResolversParentTypes['CurrentWeather'],
+> {
   interval?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
   relativeHumidity2m?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>
   temperature2m?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>
@@ -186,7 +219,10 @@ export interface CurrentWeatherResolvers<ContextType = any, ParentType extends R
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
-export interface HourlyUnitsResolvers<ContextType = any, ParentType extends ResolversParentTypes['HourlyUnits'] = ResolversParentTypes['HourlyUnits']> {
+export interface HourlyUnitsResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['HourlyUnits'] = ResolversParentTypes['HourlyUnits'],
+> {
   relativeHumidity2m?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   temperature2m?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
   time?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>
@@ -194,7 +230,10 @@ export interface HourlyUnitsResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
-export interface HourlyWeatherResolvers<ContextType = any, ParentType extends ResolversParentTypes['HourlyWeather'] = ResolversParentTypes['HourlyWeather']> {
+export interface HourlyWeatherResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['HourlyWeather'] = ResolversParentTypes['HourlyWeather'],
+> {
   relativeHumidity2m?: Resolver<Maybe<Array<Maybe<ResolversTypes['Int']>>>, ParentType, ContextType>
   temperature2m?: Resolver<Maybe<Array<Maybe<ResolversTypes['Float']>>>, ParentType, ContextType>
   time?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>
@@ -202,11 +241,22 @@ export interface HourlyWeatherResolvers<ContextType = any, ParentType extends Re
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>
 }
 
-export interface QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> {
-  getWeatherData?: Resolver<Maybe<ResolversTypes['WeatherData']>, ParentType, ContextType, RequireFields<QuerygetWeatherDataArgs, 'latitude' | 'longitude'>>
+export interface QueryResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
+> {
+  getWeatherData?: Resolver<
+  Maybe<ResolversTypes['WeatherData']>,
+  ParentType,
+  ContextType,
+  RequireFields<QuerygetWeatherDataArgs, 'latitude' | 'longitude'>
+  >
 }
 
-export interface WeatherDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['WeatherData'] = ResolversParentTypes['WeatherData']> {
+export interface WeatherDataResolvers<
+  ContextType = any,
+  ParentType extends ResolversParentTypes['WeatherData'] = ResolversParentTypes['WeatherData'],
+> {
   current?: Resolver<Maybe<ResolversTypes['CurrentWeather']>, ParentType, ContextType>
   currentUnits?: Resolver<Maybe<ResolversTypes['CurrentUnits']>, ParentType, ContextType>
   elevation?: Resolver<Maybe<ResolversTypes['Float']>, ParentType, ContextType>

@@ -36,7 +36,9 @@ describe('WeatherAPI', () => {
     const data = await weatherAPI.getWeatherData(40, -74);
 
     expect(data).toEqual(mockData);
-    expect(mockGet).toHaveBeenCalledWith(expect.stringContaining('forecast?latitude=-74&longitude=40'));
+    expect(mockGet).toHaveBeenCalledWith(
+      expect.stringContaining('forecast?latitude=-74&longitude=40')
+    );
   });
 
   it('retries on failure and succeeds', async () => {
@@ -47,7 +49,9 @@ describe('WeatherAPI', () => {
     const promise = weatherAPI.fetchWithRetry('forecast?latitude=40&longitude=-74', 2, 1000);
 
     await expect(promise).resolves.toEqual(mockData);
-    expect(mockLogger.info).toHaveBeenCalledWith(expect.stringContaining('Retrying after 1000ms. Retries left: 1'));
+    expect(mockLogger.info).toHaveBeenCalledWith(
+      expect.stringContaining('Retrying after 1000ms. Retries left: 1')
+    );
     expect(mockGet).toHaveBeenCalledTimes(2);
   });
 
@@ -57,8 +61,12 @@ describe('WeatherAPI', () => {
     const promise = weatherAPI.fetchWithRetry('forecast?latitude=40&longitude=-74', 2, 1000);
 
     await expect(promise).rejects.toThrow(GraphQLError);
-    expect(mockLogger.info).toHaveBeenCalledWith(expect.stringContaining('Retrying after 1000ms. Retries left: 1'));
-    expect(mockLogger.info).toHaveBeenCalledWith(expect.stringContaining('Retrying after 1000ms. Retries left: 0'));
+    expect(mockLogger.info).toHaveBeenCalledWith(
+      expect.stringContaining('Retrying after 1000ms. Retries left: 1')
+    );
+    expect(mockLogger.info).toHaveBeenCalledWith(
+      expect.stringContaining('Retrying after 1000ms. Retries left: 0')
+    );
     expect(mockGet).toHaveBeenCalledTimes(3);
   });
 });

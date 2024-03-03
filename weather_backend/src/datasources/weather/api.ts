@@ -65,7 +65,9 @@ export class WeatherAPI extends RESTDataSource {
           }
         });
       }
-      this.contextValue.logger.info(`WeatherAPI: Retrying after ${delay}ms. Retries left: ${retries - 1}`);
+      this.contextValue.logger.info(
+        `WeatherAPI: Retrying after ${delay}ms. Retries left: ${retries - 1}`
+      );
       await new Promise((resolve) => setTimeout(resolve, delay));
       return await this.fetchWithRetry(path, retries - 1, delay);
     }
