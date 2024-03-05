@@ -6,6 +6,7 @@ const config: CodegenConfig = {
   generates: {
     'src/schema': defineConfig({
       typesPluginsConfig: {
+        makeResolverTypeCallable: true,
         mappers: {
           WeatherData: '../model/weather#WeatherDataModel',
           CurrentUnits: '../model/weather#CurrentUnitsModel',
