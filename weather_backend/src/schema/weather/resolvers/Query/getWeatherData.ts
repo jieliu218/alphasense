@@ -2,7 +2,7 @@ import { ApolloServerErrorCode } from '@apollo/server/errors';
 import { GraphQLError } from 'graphql';
 import type { QueryResolvers } from './../../../types.generated';
 
-export const getWeatherData: NonNullable<QueryResolvers['getWeatherData']> = async (
+export const getWeatherData: Extract<QueryResolvers['getWeatherData'], CallableFunction> = async (
   _parent,
   { latitude, longitude },
   _ctx

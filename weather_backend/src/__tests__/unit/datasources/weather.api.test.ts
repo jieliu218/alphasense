@@ -2,7 +2,7 @@ import { type Logger } from 'winston';
 import { RESTDataSource } from '@apollo/datasource-rest';
 import { type KeyValueCache } from '@apollo/utils.keyvaluecache';
 import { GraphQLError } from 'graphql';
-import { WeatherAPI } from '../../datasources';
+import { WeatherAPI } from '../../../datasources';
 
 jest.mock('@apollo/datasource-rest');
 
