@@ -3,7 +3,7 @@ import { CodegenConfig } from "@graphql-codegen/cli";
 const config: CodegenConfig = {
   schema: "https://alphasense-weather-app-stxq8.ondigitalocean.app/index",
   documents: ["src/**/*.{ts,tsx}", "!./src/gql/**/*"],
-  // ignoreNoDocuments: true, // for better experience with the watcher
+  ignoreNoDocuments: true,
   generates: {
     "./src/__generated__/": {
       preset: "client",
@@ -13,7 +13,7 @@ const config: CodegenConfig = {
       },
     },
   },
-  hooks: { afterAllFileWrite: ['npx prettier --write'] },
+  hooks: { afterAllFileWrite: ["npx prettier --write"] },
 };
 
 export default config;

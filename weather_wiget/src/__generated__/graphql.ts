@@ -108,10 +108,29 @@ export type WeatherCurrentFFragment = {
   } | null;
 } & { " $fragmentName"?: "WeatherCurrentFFragment" };
 
+export type WeatherHourlyFFragment = {
+  __typename?: "WeatherData";
+  hourly?: {
+    __typename?: "HourlyWeather";
+    time?: Array<string | null> | null;
+    temperature2m?: Array<number | null> | null;
+    relativeHumidity2m?: Array<number | null> | null;
+    windSpeed10m?: Array<number | null> | null;
+  } | null;
+  hourlyUnits?: {
+    __typename?: "HourlyUnits";
+    time?: string | null;
+    temperature2m?: string | null;
+    relativeHumidity2m?: string | null;
+    windSpeed10m?: string | null;
+  } | null;
+} & { " $fragmentName"?: "WeatherHourlyFFragment" };
+
 export type GetWeatherDataQueryVariables = Exact<{
   latitude: Scalars["Float"]["input"];
   longitude: Scalars["Float"]["input"];
-  displayCurrent: Scalars["Boolean"]["input"];
+  showCurrent: Scalars["Boolean"]["input"];
+  showHourly: Scalars["Boolean"]["input"];
 }>;
 
 export type GetWeatherDataQuery = {
@@ -122,7 +141,10 @@ export type GetWeatherDataQuery = {
         latitude?: number | null;
         longitude?: number | null;
       } & {
-        " $fragmentRefs"?: { WeatherCurrentFFragment: WeatherCurrentFFragment };
+        " $fragmentRefs"?: {
+          WeatherCurrentFFragment: WeatherCurrentFFragment;
+          WeatherHourlyFFragment: WeatherHourlyFFragment;
+        };
       })
     | null;
 };
@@ -191,6 +213,68 @@ export const WeatherCurrentFFragmentDoc = {
     },
   ],
 } as unknown as DocumentNode<WeatherCurrentFFragment, unknown>;
+export const WeatherHourlyFFragmentDoc = {
+  kind: "Document",
+  definitions: [
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "WeatherHourlyF" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "WeatherData" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "hourly" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "time" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "temperature2m" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "relativeHumidity2m" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "windSpeed10m" },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "hourlyUnits" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "time" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "temperature2m" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "relativeHumidity2m" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "windSpeed10m" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<WeatherHourlyFFragment, unknown>;
 export const GetWeatherDataDocument = {
   kind: "Document",
   definitions: [
@@ -225,7 +309,21 @@ export const GetWeatherDataDocument = {
           kind: "VariableDefinition",
           variable: {
             kind: "Variable",
-            name: { kind: "Name", value: "displayCurrent" },
+            name: { kind: "Name", value: "showCurrent" },
+          },
+          type: {
+            kind: "NonNullType",
+            type: {
+              kind: "NamedType",
+              name: { kind: "Name", value: "Boolean" },
+            },
+          },
+        },
+        {
+          kind: "VariableDefinition",
+          variable: {
+            kind: "Variable",
+            name: { kind: "Name", value: "showHourly" },
           },
           type: {
             kind: "NonNullType",
@@ -278,7 +376,27 @@ export const GetWeatherDataDocument = {
                           name: { kind: "Name", value: "if" },
                           value: {
                             kind: "Variable",
-                            name: { kind: "Name", value: "displayCurrent" },
+                            name: { kind: "Name", value: "showCurrent" },
+                          },
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  kind: "FragmentSpread",
+                  name: { kind: "Name", value: "WeatherHourlyF" },
+                  directives: [
+                    {
+                      kind: "Directive",
+                      name: { kind: "Name", value: "include" },
+                      arguments: [
+                        {
+                          kind: "Argument",
+                          name: { kind: "Name", value: "if" },
+                          value: {
+                            kind: "Variable",
+                            name: { kind: "Name", value: "showHourly" },
                           },
                         },
                       ],
@@ -343,6 +461,63 @@ export const GetWeatherDataDocument = {
                 {
                   kind: "Field",
                   name: { kind: "Name", value: "relativeHumidity2m" },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+    {
+      kind: "FragmentDefinition",
+      name: { kind: "Name", value: "WeatherHourlyF" },
+      typeCondition: {
+        kind: "NamedType",
+        name: { kind: "Name", value: "WeatherData" },
+      },
+      selectionSet: {
+        kind: "SelectionSet",
+        selections: [
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "hourly" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "time" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "temperature2m" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "relativeHumidity2m" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "windSpeed10m" },
+                },
+              ],
+            },
+          },
+          {
+            kind: "Field",
+            name: { kind: "Name", value: "hourlyUnits" },
+            selectionSet: {
+              kind: "SelectionSet",
+              selections: [
+                { kind: "Field", name: { kind: "Name", value: "time" } },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "temperature2m" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "relativeHumidity2m" },
+                },
+                {
+                  kind: "Field",
+                  name: { kind: "Name", value: "windSpeed10m" },
                 },
               ],
             },

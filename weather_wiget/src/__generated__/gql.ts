@@ -15,7 +15,9 @@ import { TypedDocumentNode as DocumentNode } from "@graphql-typed-document-node/
 const documents = {
   "\n  fragment WeatherCurrentF on WeatherData {\n    current {\n      time\n      interval\n      temperature2m\n      windSpeed10m\n      relativeHumidity2m\n    }\n    currentUnits {\n      time\n      interval\n      temperature2m\n      windSpeed10m\n      relativeHumidity2m\n    }\n  }\n":
     types.WeatherCurrentFFragmentDoc,
-  "\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $displayCurrent: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF @include(if: $displayCurrent)\n      }\n    }\n  ":
+  "\n  fragment WeatherHourlyF on WeatherData {\n    hourly {\n      time\n      temperature2m\n      relativeHumidity2m\n      windSpeed10m\n    }\n    hourlyUnits {\n      time\n      temperature2m\n      relativeHumidity2m\n      windSpeed10m\n    }\n  }\n":
+    types.WeatherHourlyFFragmentDoc,
+  "\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $showCurrent: Boolean!\n      $showHourly: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF @include(if: $showCurrent)\n        ...WeatherHourlyF @include(if: $showHourly)\n      }\n    }\n  ":
     types.GetWeatherDataDocument,
 };
 
@@ -43,8 +45,14 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $displayCurrent: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF @include(if: $displayCurrent)\n      }\n    }\n  ",
-): (typeof documents)["\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $displayCurrent: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF @include(if: $displayCurrent)\n      }\n    }\n  "];
+  source: "\n  fragment WeatherHourlyF on WeatherData {\n    hourly {\n      time\n      temperature2m\n      relativeHumidity2m\n      windSpeed10m\n    }\n    hourlyUnits {\n      time\n      temperature2m\n      relativeHumidity2m\n      windSpeed10m\n    }\n  }\n",
+): (typeof documents)["\n  fragment WeatherHourlyF on WeatherData {\n    hourly {\n      time\n      temperature2m\n      relativeHumidity2m\n      windSpeed10m\n    }\n    hourlyUnits {\n      time\n      temperature2m\n      relativeHumidity2m\n      windSpeed10m\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(
+  source: "\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $showCurrent: Boolean!\n      $showHourly: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF @include(if: $showCurrent)\n        ...WeatherHourlyF @include(if: $showHourly)\n      }\n    }\n  ",
+): (typeof documents)["\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $showCurrent: Boolean!\n      $showHourly: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF @include(if: $showCurrent)\n        ...WeatherHourlyF @include(if: $showHourly)\n      }\n    }\n  "];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
