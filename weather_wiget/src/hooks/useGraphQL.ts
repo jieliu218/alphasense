@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import request from "graphql-request";
 import { type TypedDocumentNode } from "@graphql-typed-document-node/core";
 import { useQuery, type UseQueryResult } from "@tanstack/react-query";
@@ -28,5 +27,7 @@ export function useGraphQL<
         document,
         variables,
       ),
+    refetchOnWindowFocus: true,
+    refetchInterval: 1000 * 60,
   });
 }

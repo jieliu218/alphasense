@@ -1,19 +1,20 @@
 import {
   Box,
   Divider,
+  Skeleton,
   Stack,
   Typography,
-  alpha,
   useTheme,
 } from "@mui/material";
 import ThermostatIcon from "@mui/icons-material/Thermostat";
 import AirIcon from "@mui/icons-material/Air";
 import OpacityIcon from "@mui/icons-material/Opacity";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
-import TodayIcon from "@mui/icons-material/Today";
-import dayjs from "dayjs";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { gql, FragmentType, useFragment } from "../../../__generated__";
 import { CurrentUnits, CurrentWeather } from "../../../__generated__/graphql";
+import { fDateTime } from "../../../utils/formatTime";
+import { bgBlur, textBlur } from "../../../theme/css";
 
 export const WeatherCurrentFragment = gql(/* GraphQL */ `
   fragment WeatherCurrentF on WeatherData {
@@ -52,14 +53,14 @@ const WeatherCurrent = (props: {
     props.currentUnits,
   ) as CurrentUnits;
 
-  const textColor = alpha(theme.palette.common.white, 0.7);
+  const textColor = textBlur(theme.palette.common.white, 0.7);
 
   return (
     <Box
       sx={{
         display: "flex",
         flexDirection: "column",
-        bgcolor: alpha(theme.palette.common.white, 0.2),
+        bgcolor: bgBlur({ color: theme.palette.common.white, opacity: 0.2 }),
         p: 2,
         borderRadius: 2,
       }}
@@ -91,14 +92,14 @@ const WeatherCurrent = (props: {
             alignItems="center"
             spacing={0.25}
           >
-            <TodayIcon sx={{ fontSize: 20, color: textColor }} />
+            <AccessTimeIcon sx={{ fontSize: 20, color: textColor }} />
             <Typography
               gutterBottom
               variant="body1"
               component="span"
               color={textColor}
             >
-              {dayjs(current?.time).format("HH:mm A")}
+              {fDateTime(current?.time, "h:mm aaaa")}
             </Typography>
           </Stack>
           <Stack
@@ -177,6 +178,10 @@ const WeatherCurrent = (props: {
       </Stack>
     </Box>
   );
+};
+
+export const WeatherCurrentSkeleton = () => {
+  return <Skeleton variant="rectangular" width={332} height={145} />;
 };
 
 export default WeatherCurrent;

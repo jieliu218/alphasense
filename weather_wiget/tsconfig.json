@@ -7,7 +7,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-
+    "types": ["jest", "@testing-library/jest-dom", "node"],
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -24,5 +24,6 @@
     "noPropertyAccessFromIndexSignature": false
   },
   "include": ["src"],
+  "exclude": ["node_modules", "dist", "jest.config.ts", "jest.setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

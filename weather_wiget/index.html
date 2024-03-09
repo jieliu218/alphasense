@@ -9,7 +9,24 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-    <weather-wiget latitude="90"></weather-wiget>
+    <weather-wiget
+      latitude="90"
+      longitude="89"
+      theme='{
+        "palette":{
+          "primary":{
+              "main":"#917ca9"
+          },
+          "secondary":{
+              "main":"#a4bc8a"
+          },
+          "warning":{
+              "main":"#917ca9",
+              "light":"#bcaacf"
+          }
+        }
+    }'
+    ></weather-wiget>
 
     <script type="module" src="/dist/weather-wiget.es.js"></script>
   </body>

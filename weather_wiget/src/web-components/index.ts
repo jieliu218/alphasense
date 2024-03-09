@@ -9,6 +9,7 @@ customElements.define(
       longitude: "number",
       showCurrent: "boolean",
       showHourly: "boolean",
+      theme: "json",
     },
   }),
 );

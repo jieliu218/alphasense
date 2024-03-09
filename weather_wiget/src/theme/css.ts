@@ -39,4 +39,6 @@ export function bgBlur(props?: BgBlurProps) {
   };
 }
 
-export const textColor = alpha("#ffffff", 0.7);
+export function textBlur(color: string, opacity: number) {
+  return alpha(color, opacity);
+}

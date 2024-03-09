@@ -1,10 +1,10 @@
 import ThermostatIcon from "@mui/icons-material/Thermostat";
 import AirIcon from "@mui/icons-material/Air";
 import OpacityIcon from "@mui/icons-material/Opacity";
-import { Box, Divider, Stack, useTheme } from "@mui/material";
+import { Box, Divider, Skeleton, Stack, useTheme } from "@mui/material";
 import { gql, FragmentType, useFragment } from "../../../__generated__";
 import { HourlyUnits, HourlyWeather } from "../../../__generated__/graphql";
-import { textColor } from "../../../theme/css";
+import { textBlur } from "../../../theme/css";
 import WeatherHourlyChart from "./WeatherHourlyChart";
 
 export const WeatherHourlyFragment = gql(/* GraphQL */ `
@@ -39,20 +39,22 @@ const WeatherHourly = (props: {
     props.hourlyUnits,
   ) as HourlyUnits;
 
+  const textColor = textBlur(theme.palette.common.white, 0.7);
+
   return (
-    <Box>
+    <Box data-testid="WeatherHourly">
       <Divider sx={{ mt: 2, mb: 2, color: textColor }}>Hourly</Divider>
       <Stack
         direction="column"
         justifyContent="justify-content"
         alignItems="center"
-        spacing={2}
+        spacing={1}
       >
         <WeatherHourlyChart
           title="Temperature"
           icon={<ThermostatIcon sx={{ fontSize: 20, color: textColor }} />}
           time={hourly?.time as string[]}
-          unit={hourlyUnits?.temperature2m || "°C"}
+          unit={hourlyUnits?.temperature2m}
           chart={{
             series: hourly?.temperature2m as number[],
           }}
@@ -61,7 +63,7 @@ const WeatherHourly = (props: {
           title="Humidity"
           icon={<OpacityIcon sx={{ fontSize: 20, color: textColor }} />}
           time={hourly?.time as string[]}
-          unit={hourlyUnits?.relativeHumidity2m || "%"}
+          unit={hourlyUnits?.relativeHumidity2m}
           chart={{
             colors: [theme.palette.info.light, theme.palette.info.main],
             series: hourly?.relativeHumidity2m as number[],
@@ -71,9 +73,12 @@ const WeatherHourly = (props: {
           title="Wind Speed"
           icon={<AirIcon sx={{ fontSize: 20, color: textColor }} />}
           time={hourly?.time as string[]}
-          unit={hourlyUnits?.windSpeed10m || "m/s"}
+          unit={hourlyUnits?.windSpeed10m}
           chart={{
-            colors: [theme.palette.warning.light, theme.palette.warning.main],
+            colors: [
+              theme.palette.secondary.light,
+              theme.palette.secondary.main,
+            ],
             series: hourly?.windSpeed10m as number[],
           }}
         />
@@ -82,4 +87,23 @@ const WeatherHourly = (props: {
   );
 };
 
+const WeatherHourlySkeleton = ({ textColor }: { textColor: string }) => {
+  return (
+    <Box>
+      <Divider sx={{ mt: 2, mb: 2, color: textColor }}>Hourly</Divider>
+      <Stack
+        direction="column"
+        justifyContent="justify-content"
+        alignItems="center"
+        spacing={1}
+      >
+        <Skeleton variant="rectangular" width={332} height={145} />
+        <Skeleton variant="rectangular" width={332} height={145} />
+        <Skeleton variant="rectangular" width={332} height={145} />
+      </Stack>
+    </Box>
+  );
+};
+
+export { WeatherHourlySkeleton };
 export default WeatherHourly;

@@ -8,16 +8,17 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import Chart, { useChart } from "../../../components/chart";
-import { bgBlur, textColor } from "../../../theme/css";
+import Chart, { useChart } from "../../../components/Chart";
+import { bgBlur, textBlur } from "../../../theme/css";
 import { fDateTime } from "../../../utils/formatTime";
 import { fNumber } from "../../../utils/formatNumber";
+import { Maybe } from "../../../__generated__/graphql";
 
 interface WeatherHourlyChartProps extends BoxProps {
   title: string;
   icon: React.ReactNode;
   time: string[] | undefined;
-  unit: string;
+  unit: Maybe<string> | undefined;
   chart: {
     colors?: string[];
     series: number[];
@@ -81,6 +82,8 @@ const WeatherHourlyChart: FC<WeatherHourlyChartProps> = ({
     },
     ...options,
   });
+
+  const textColor = textBlur(theme.palette.common.white, 0.7);
 
   return (
     <Box
