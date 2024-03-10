@@ -19,7 +19,7 @@ interface MenuProps {
   isMenuOpen: boolean;
   defaultLatitude?: number;
   defaultLongitude?: number;
-  showHourly?: boolean;
+  show?: boolean;
   toggleMenu: (
     open: boolean,
   ) => (event: React.KeyboardEvent | React.MouseEvent) => void;
@@ -30,7 +30,7 @@ const Menu: FC<MenuProps> = ({
   isMenuOpen,
   defaultLatitude,
   defaultLongitude,
-  showHourly,
+  show,
   toggleMenu,
   saveLatutudeLongitude,
 }) => {
@@ -90,7 +90,7 @@ const Menu: FC<MenuProps> = ({
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            ...(!showHourly && { height: 200, overflow: "auto" }),
+            ...(!show && { height: 200, overflow: "auto" }),
           }}
         >
           <Stack display="flex" direction="column" width="100%">

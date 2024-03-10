@@ -16,7 +16,7 @@ const documents = {
     types.WeatherCurrentFFragmentDoc,
   "\n  fragment WeatherHourlyF on WeatherData {\n    hourly {\n      time\n      temperature2m\n      relativeHumidity2m\n      windSpeed10m\n    }\n    hourlyUnits {\n      time\n      temperature2m\n      relativeHumidity2m\n      windSpeed10m\n    }\n  }\n":
     types.WeatherHourlyFFragmentDoc,
-  "\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $showHourly: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF\n        ...WeatherHourlyF @include(if: $showHourly)\n      }\n    }\n  ":
+  "\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $hourly: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF\n        ...WeatherHourlyF @include(if: $hourly)\n      }\n    }\n  ":
     types.GetWeatherDataDocument,
 };
 
@@ -50,8 +50,8 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: "\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $showHourly: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF\n        ...WeatherHourlyF @include(if: $showHourly)\n      }\n    }\n  ",
-): (typeof documents)["\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $showHourly: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF\n        ...WeatherHourlyF @include(if: $showHourly)\n      }\n    }\n  "];
+  source: "\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $hourly: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF\n        ...WeatherHourlyF @include(if: $hourly)\n      }\n    }\n  ",
+): (typeof documents)["\n    query GetWeatherData(\n      $latitude: Float!\n      $longitude: Float!\n      $hourly: Boolean!\n    ) {\n      getWeatherData(latitude: $latitude, longitude: $longitude) {\n        latitude\n        longitude\n        ...WeatherCurrentF\n        ...WeatherHourlyF @include(if: $hourly)\n      }\n    }\n  "];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

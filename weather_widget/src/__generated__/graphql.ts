@@ -128,7 +128,7 @@ export type WeatherHourlyFFragment = {
 export type GetWeatherDataQueryVariables = Exact<{
   latitude: Scalars["Float"]["input"];
   longitude: Scalars["Float"]["input"];
-  showHourly: Scalars["Boolean"]["input"];
+  hourly: Scalars["Boolean"]["input"];
 }>;
 
 export type GetWeatherDataQuery = {
@@ -307,7 +307,7 @@ export const GetWeatherDataDocument = {
           kind: "VariableDefinition",
           variable: {
             kind: "Variable",
-            name: { kind: "Name", value: "showHourly" },
+            name: { kind: "Name", value: "hourly" },
           },
           type: {
             kind: "NonNullType",
@@ -364,7 +364,7 @@ export const GetWeatherDataDocument = {
                           name: { kind: "Name", value: "if" },
                           value: {
                             kind: "Variable",
-                            name: { kind: "Name", value: "showHourly" },
+                            name: { kind: "Name", value: "hourly" },
                           },
                         },
                       ],

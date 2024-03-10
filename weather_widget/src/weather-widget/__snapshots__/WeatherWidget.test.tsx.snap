@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WeatherwidgetWapper renders correctly with showCurrent and showHourly props 1`] = `
+exports[`WeatherwidgetWapper renders correctly with showCurrent and show props 1`] = `
 <DocumentFragment>
   <div
     class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-8058vh-MuiPaper-root-MuiCard-root"

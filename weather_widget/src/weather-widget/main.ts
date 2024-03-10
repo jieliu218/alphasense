@@ -7,7 +7,7 @@ customElements.define(
     props: {
       latitude: "number",
       longitude: "number",
-      showHourly: "boolean",
+      hourly: "number",
       theme: "json",
     },
   }),

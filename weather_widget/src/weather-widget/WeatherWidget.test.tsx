@@ -29,7 +29,7 @@ jest.mock("./WeatherHourly/WeatherHourlySkeleton", () => ({
 }));
 
 describe("WeatherwidgetWapper", () => {
-  it("renders correctly with showCurrent and showHourly props", async () => {
+  it("renders correctly with showCurrent and show props", async () => {
     (useGraphQL as jest.Mock).mockReturnValue({
       data: {
         getWeatherData: {
@@ -45,7 +45,7 @@ describe("WeatherwidgetWapper", () => {
       isError: false,
     });
     const { asFragment } = render(
-      <WeatherwidgetWapper latitude={0} longitude={0} showHourly={true} />,
+      <WeatherwidgetWapper latitude={0} longitude={0} hourly={1} />,
     );
     await waitFor(() => {
       expect(screen.getByText("Mocked WeatherCurrent")).toBeInTheDocument();
@@ -69,7 +69,7 @@ describe("WeatherwidgetWapper", () => {
     });
 
     const { asFragment } = render(
-      <WeatherwidgetWapper latitude={0} longitude={0} showHourly={true} />,
+      <WeatherwidgetWapper latitude={0} longitude={0} hourly={1} />,
     );
 
     expect(
@@ -93,7 +93,7 @@ describe("WeatherwidgetWapper", () => {
     });
 
     const { asFragment } = render(
-      <WeatherwidgetWapper latitude={0} longitude={0} showHourly={true} />,
+      <WeatherwidgetWapper latitude={0} longitude={0} hourly={1} />,
     );
 
     expect(

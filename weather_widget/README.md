@@ -115,7 +115,7 @@ After including the script, you can use the widget in your HTML as follows:
 The Weather Widget supports several props for customization:
 
 - latitude and longitude: Specify the location to fetch weather data for.
-- showHourly: Boolean attribute to control the visibility of hourly weather data.
+- show: Boolean attribute to control the visibility of hourly weather data.
 - theme: Customize the widget's appearance using MUI theme options.
 
 ## Local dev

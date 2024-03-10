@@ -23,14 +23,14 @@ const WeatherHourlySkeletonLazy = React.lazy(
 export interface WeatherWidgetProps {
   latitude: number;
   longitude: number;
-  showHourly?: boolean;
+  hourly?: number;
   theme?: Record<string, any>;
 }
 
 const Weatherwidget: FC<WeatherWidgetProps> = ({
   latitude,
   longitude,
-  showHourly = true,
+  hourly = 1,
 }) => {
   const theme = useTheme();
   const [latitudeValue, setLatitudeValue] = useState<number>(latitude);
@@ -41,13 +41,13 @@ const Weatherwidget: FC<WeatherWidgetProps> = ({
     query GetWeatherData(
       $latitude: Float!
       $longitude: Float!
-      $showHourly: Boolean!
+      $hourly: Boolean!
     ) {
       getWeatherData(latitude: $latitude, longitude: $longitude) {
         latitude
         longitude
         ...WeatherCurrentF
-        ...WeatherHourlyF @include(if: $showHourly)
+        ...WeatherHourlyF @include(if: $hourly)
       }
     }
   `);
@@ -55,7 +55,7 @@ const Weatherwidget: FC<WeatherWidgetProps> = ({
   const { data, isLoading, isError } = useGraphQL(WeatherQueryDocument, {
     latitude: latitudeValue,
     longitude: longitudeValue,
-    showHourly,
+    hourly: Boolean(hourly),
   });
 
   const handleToggleMenu =
@@ -72,7 +72,6 @@ const Weatherwidget: FC<WeatherWidgetProps> = ({
     };
 
   const textColor = textBlur(theme.palette.common.white, 0.7);
-
   return (
     <Card
       id="drawer-container"
@@ -110,7 +109,7 @@ const Weatherwidget: FC<WeatherWidgetProps> = ({
         toggleMenu={handleToggleMenu}
         defaultLatitude={latitudeValue}
         defaultLongitude={longitudeValue}
-        showHourly={showHourly}
+        show={Boolean(hourly)}
         saveLatutudeLongitude={(latitude, longitude) => {
           setLatitudeValue(latitude);
           setLongitudeValue(longitude);
@@ -143,7 +142,7 @@ const Weatherwidget: FC<WeatherWidgetProps> = ({
         ) : (
           <WeatherCurrentSkeletonLazy />
         )}
-        {showHourly &&
+        {Boolean(hourly) &&
           (!isLoading && !isError ? (
             <Suspense
               fallback={<WeatherHourlySkeletonLazy textColor={textColor} />}
@@ -165,6 +164,8 @@ const Weatherwidget: FC<WeatherWidgetProps> = ({
 
 const WeatherWidgetWapper: FC<WeatherWidgetProps> = (props) => {
   const theme = createTheme(props.theme);
+  console.log(props);
+
   return (
     <QueryClientProvider client={new QueryClient()}>
       <ThemeProvider theme={theme}>

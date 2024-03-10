@@ -44,12 +44,13 @@ function App() {
               latitude={-40}
               longitude={74}
               theme={themePurple}
-              showHourly={false}
+              hourly={1}
             />
             <weather-widget
               latitude={-40}
               longitude={74}
               theme={JSON.stringify(themePurple)}
+              hourly={0}
             ></weather-widget>
           </Stack>
         </Container>
