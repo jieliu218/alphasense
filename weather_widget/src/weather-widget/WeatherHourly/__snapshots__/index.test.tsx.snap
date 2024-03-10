@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeatherHourly renders correctly with hourly weather data 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="WeatherHourly"
+  >
+    <div
+      class="MuiDivider-root MuiDivider-fullWidth MuiDivider-withChildren css-1p87euv-MuiDivider-root"
+      role="separator"
+    >
+      <span
+        class="MuiDivider-wrapper css-qywfm8-MuiDivider-wrapper"
+      >
+        Hourly
+      </span>
+    </div>
+    <div
+      class="MuiStack-root css-1fcys0l-MuiStack-root"
+    >
+      <div>
+        Temperature Chart Mock
+      </div>
+      <div>
+        Humidity Chart Mock
+      </div>
+      <div>
+        Wind Speed Chart Mock
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

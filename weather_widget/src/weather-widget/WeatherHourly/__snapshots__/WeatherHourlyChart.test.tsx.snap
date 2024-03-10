@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeatherHourlyChart renders correctly with given props 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root css-1acq8i5"
+  >
+    <div
+      class="MuiStack-root css-qp5e3-MuiStack-root"
+    >
+      <span>
+        Icon
+      </span>
+      <span
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-gutterBottom css-zt1oku-MuiTypography-root"
+      >
+        Test Chart
+      </span>
+    </div>
+    <hr
+      class="MuiDivider-root MuiDivider-fullWidth css-ctpjxq-MuiDivider-root"
+    />
+    <div>
+      MockedChart
+    </div>
+  </div>
+</DocumentFragment>
+`;
