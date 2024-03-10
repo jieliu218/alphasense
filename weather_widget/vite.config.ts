@@ -6,7 +6,7 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   plugins: [
     react(),
-    visualizer({ open: true }),
+    visualizer({ open: false }),
     dts({
       exclude: [
         "**/node_modules/**",
